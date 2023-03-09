@@ -1,6 +1,9 @@
 const { WebcastPushConnection } = require('tiktok-live-connector');
-let tiktokUsername = "holasoymalva";
-let tiktokLiveConnection = new WebcastPushConnection(tiktokUsername);
+require('dotenv').config();
+
+
+const tiktokUsername = process.env.USER_NAME;
+const tiktokLiveConnection = new WebcastPushConnection(tiktokUsername);
 
 tiktokLiveConnection.connect().then(state => {
 
@@ -18,6 +21,10 @@ tiktokLiveConnection.on('gift', data => {
 
 tiktokLiveConnection.on('like', data => {
     console.log(`${data.nickname} muchas gracias por tus likes 👩‍🚀😸`);
+})
+
+tiktokLiveConnection.on('comment', data => {
+    console.log(data);
 })
 
 tiktokLiveConnection.on('follow', (data) => {
